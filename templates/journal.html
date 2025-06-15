@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mental Health Journal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Quill Editor CSS -->
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet" />
+
+    <style>
+        /* Right side vertical severity bar (optional, add if needed) */
+        #severity-bar {
+            width: 10px;
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #e2e8f0; /* default gray-200 */
+            transition: background-color 0.5s ease;
+            z-index: 10;
+        }
+
+        /* Disabled button styling */
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            box-shadow: none !important;
+        }
+
+        /* Quill editor overrides */
+        #editor {
+            height: 250px;
+            background: white;
+            border: 1px solid #d1d5db; /* gray-300 */
+            border-radius: 0.375rem; /* rounded */
+            padding: 0.5rem;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans">
+<div id="severity-bar"></div>
+
+<main class="max-w-3xl mx-auto py-10 px-6">
+    <div
+            class="mb-6 p-4 bg-blue-50 border-l-4 border-blue-300 text-sm rounded text-blue-900"
+    >
+        <strong>Note:</strong> This journal is a personal space to help you
+        reflect on your thoughts and feelings. It is not a substitute for
+        professional advice but can support your mental health journey by
+        encouraging regular self-expression and awareness.
+
+        Writing regularly can deepen your understanding of your emotions and
+        provide valuable insights when combined with personalized AI reflections
+        and suggestions.
+    </div>
+
+    <h1 class="text-3xl font-bold mb-6">Mental Health Journal</h1>
+
+    <div class="flex flex-wrap gap-4 mb-4 items-center">
+        <label
+                for="currentDate"
+                class="font-semibold text-gray-700 select-none"
+        >Date:</label
+        >
+        <input
+                type="date"
+                id="currentDate"
+                class="border border-gray-300 rounded px-3 py-1 text-gray-700 focus:outline-none focus:border-blue-400"
+        />
+
+        <button
+                id="prevBtn"
+                class="bg-gray-300 hover:bg-gray-400 text-gray-800 px-3 py-1 rounded"
+                title="Previous Day"
+        >
+            &lt;
+        </button>
+        <button
+                id="nextBtn"
+                class="bg-gray-300 hover:bg-gray-400 text-gray-800 px-3 py-1 rounded"
+                title="Next Day"
+        >
+            &gt;
+        </button>
+
+        <button
+                id="saveBtn"
+                class="bg-blue-400 hover:bg-blue-500 text-white px-4 py-2 rounded"
+        >
+            Save Entry
+        </button>
+
+        <button
+                id="analyzeBtn"
+                class="bg-green-400 hover:bg-green-500 text-white px-4 py-2 rounded"
+        >
+            Analyze Past 5 Days
+        </button>
+    </div>
+
+    <!-- Quill Editor Container -->
+    <div id="editor" placeholder="Write your journal entry here..."></div>
+
+    <div class="flex flex-wrap gap-4 mt-4 items-center">
+        <label
+                for="tags"
+                class="font-semibold text-gray-700 select-none"
+        >Tags (comma separated):</label
+        >
+        <input
+                type="text"
+                id="tags"
+                placeholder="e.g. anxiety, work, gratitude"
+                class="border border-gray-300 rounded px-3 py-1 text-gray-700 focus:outline-none focus:border-blue-400 flex-grow"
+        />
+        <span
+                id="wordCount"
+                class="ml-auto text-gray-500 text-sm select-none"
+        >Words: 0</span
+        >
+    </div>
+
+    <div class="flex flex-wrap gap-4 mt-6 items-center">
+        <input
+                type="text"
+                id="search"
+                placeholder="Search entries by tag"
+                class="border border-gray-300 rounded px-3 py-1 text-gray-700 focus:outline-none focus:border-blue-400 flex-grow"
+        />
+        <button
+                id="searchBtn"
+                class="bg-blue-400 hover:bg-blue-500 text-white px-4 py-2 rounded"
+        >
+            Search
+        </button>
+        <button
+                id="showAllBtn"
+                class="bg-gray-400 hover:bg-gray-500 text-white px-4 py-2 rounded"
+        >
+            Show All
+        </button>
+    </div>
+
+    <h2 class="mt-10 mb-4 text-2xl font-semibold">Previous Entries</h2>
+    <ul
+            id="searchResults"
+            class="space-y-2 max-h-64 overflow-y-auto border border-gray-200 rounded p-4 bg-white"
+    ></ul>
+
+    <div
+            id="analysisOutput"
+            class="mt-8 p-4 bg-yellow-50 border border-yellow-300 rounded text-yellow-900 whitespace-pre-wrap"
+    ></div>
+</main>
+
+<!-- Quill JS -->
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
+<!-- Your custom JS -->
+<script src="{{ url_for('static', filename='journalScript.js') }}"></script>
+</body>
+</html>

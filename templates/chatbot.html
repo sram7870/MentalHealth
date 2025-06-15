@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Mental Health Chatbot</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+    </head>
+    <body class="bg-gray-50 min-h-screen flex flex-col items-center p-6">
+
+    <!-- Info box like your note -->
+        <div class="max-w-3xl mx-auto py-10 px-6">
+            <div class="mb-6 p-4 bg-blue-50 border-l-4 border-blue-300 text-sm rounded">
+            <p>
+                <strong>Note:</strong> This chatbot is here to listen and support you. While it provides a friendly conversation, it is not a substitute for professional mental health care.
+            </p>
+            </div>
+
+
+            <h1 class="text-3xl font-bold mb-6 max-w-3xl w-full">Mental Health Chatbot</h1>
+
+            <div class="max-w-3xl w-full bg-white rounded shadow p-6 flex flex-col" style="height: 600px;">
+                <div id="chatWindow" class="flex-grow overflow-y-auto mb-6 space-y-3 px-2">
+                    <!-- Chat messages will appear here -->
+                </div>
+
+                <form id="chatForm" class="flex gap-4">
+                  <textarea
+                          id="userInput"
+                          placeholder="Type your message here..."
+                          rows="2"
+                          class="flex-grow border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 resize-none"
+                          required
+                  ></textarea>
+                    <button
+                            type="submit"
+                            class="bg-red-400 text-white px-6 py-2 rounded-md hover:bg-red-500 transition"
+                    >
+                        Send
+                    </button>
+                </form>
+            </div>
+            <div>
+                <p class="font-semibold text-lg mt-10 mb-4">Need Help?</p>
+
+                <p class="text-gray-700 text-sm mb-2">
+                    Here are some trusted places to contact for support within the United States:
+                </p>
+
+                <ul class="list-disc list-inside text-gray-700 text-sm mb-4">
+                    <li>National Suicide Prevention Lifeline: <a href="tel:988" class="underline text-blue-600 hover:text-blue-800">988</a></li>
+                    <li>Crisis Text Line: Text <code>HOME</code> to <a href="sms:741741" class="underline text-blue-600 hover:text-blue-800">741741</a></li>
+                    <li>Substance Abuse and Mental Health Services Administration (SAMHSA) Helpline: <a href="tel:1-800-662-4357" class="underline text-blue-600 hover:text-blue-800">1-800-662-HELP (4357)</a></li>
+                    <li>National Alliance on Mental Illness (NAMI) Helpline: <a href="tel:1-800-950-6264" class="underline text-blue-600 hover:text-blue-800">1-800-950-NAMI (6264)</a></li>
+                </ul>
+
+                <p class="text-gray-700 text-sm">
+                    Reaching out is a sign of strength, and help is available whenever you need it. Remember, taking care of your mental health is just as important as your physical health, and support is here to guide you at your own pace.
+                </p>
+            </div>
+        </div>
+    </body>
+
+    <script src="{{ url_for('static', filename='chatbotScript.js') }}"></script>
+</html>
