@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <title>Mental Health: Companion Dashboard</title>
+      <script src="https://cdn.tailwindcss.com"></script>
+      <script>
+          tailwind.config = {
+              theme: {
+                  extend: {
+                      animation: {
+                          fadeIn: 'fadeIn 1.2s ease-out forwards',
+                      },
+                      keyframes: {
+                          fadeIn: {
+                              '0%': { opacity: 0, transform: 'translateY(10px)' },
+                              '100%': { opacity: 1, transform: 'translateY(0)' },
+                          },
+                      },
+                  }
+              }
+          };
+      </script>
+  </head>
+  <body class="bg-gray-100 text-gray-900 font-sans py-10 px-4">
+  
+    <main class="max-w-3xl mx-auto space-y-8 animate-fadeIn">
+    
+        <!-- Header -->
+        <header class="text-center">
+            <h1 class="text-3xl font-semibold text-gray-800 mb-1">Mental Health Companion</h1>
+            <p class="text-sm text-gray-600">Reflect, track, and grow — your personal well-being assistant</p>
+        </header>
+    
+        <!-- Prompt of the Day -->
+        <section class="bg-white border border-gray-200 rounded-lg shadow-sm p-5">
+            <h2 class="text-lg font-medium text-blue-700 mb-2">Prompt of the Day</h2>
+            <p id="dailyPrompt" class="text-gray-700 italic text-sm">Loading today's prompt...</p>
+        </section>
+    
+        <!-- Breaking the Stigma -->
+        <section class="bg-white border border-gray-200 rounded-lg shadow-sm p-5">
+            <h2 class="text-lg font-medium text-red-500 mb-3">Breaking the Stigma</h2>
+            <p class="text-gray-800 text-sm mb-3">
+                Mental health stigma remains a significant barrier for those seeking help. Many individuals fear being judged, misunderstood, or discriminated against for experiencing emotional struggles.
+            </p>
+            <p class="text-gray-800 text-sm mb-3">
+                Breaking this stigma requires open dialogue, education, and empathy. Talking openly about mental health in schools, workplaces, and communities can help normalize these conversations.
+            </p>
+            <p class="text-gray-800 text-sm">
+                If you or someone you know is struggling, reach out. You are not alone, and there are resources available to support your journey toward healing.
+            </p>
+        </section>
+    
+        <!-- Daily Motivation -->
+        <section class="bg-white border border-gray-200 rounded-lg shadow-sm p-5">
+            <h2 class="text-lg font-medium text-green-600 mb-2">Daily Motivation</h2>
+            <p id="motivationalQuote" class="text-gray-700 italic text-sm">Loading motivational quote...</p>
+        </section>
+    
+        <!-- Navigation -->
+        <section class="bg-white border border-gray-200 rounded-lg shadow-sm p-5">
+            <h2 class="text-lg font-medium text-gray-800 mb-4">Navigate</h2>
+            <div class="flex flex-wrap justify-center gap-3">
+                <a href="/quiz" class="text-sm px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition">Take a Quiz</a>
+                <a href="/journal" class="text-sm px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition">Journal</a>
+                <a href="/chatbot" class="text-sm px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition">Chatbot</a>
+            </div>
+        </section>
+    
+    </main>
+    
+    <script src="{{ url_for('static', filename='indexScript.js') }}"></script>
+  </body>
+</html>
