@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-  console.log('[DEBUG] DOM fully loaded, script running.');
 
   const quizzes = {
     phq9: [
@@ -85,11 +84,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.getElementById('toggle-info').addEventListener('click', () => {
     document.getElementById('quiz-info').classList.toggle('open');
-    console.log('[DEBUG] Toggled quiz info panel');
   });
 
   function loadQuiz(type) {
-    console.log(`[DEBUG] Loading quiz: ${type}`);
     const quizArea = document.getElementById('quiz-area');
     quizArea.innerHTML = '';
     const questions = quizzes[type];
@@ -204,9 +201,6 @@ document.addEventListener('DOMContentLoaded', () => {
       qaPairs.push(`Q: ${question}\nA: ${value}`);
     }
 
-    console.log(`[DEBUG] Submitting quiz '${type}' with score:`, score);
-    console.log('[DEBUG] QA pairs:', qaPairs);
-
     userAnswers[type] = { score, qaPairs };
 
     fetch('/quiz/analyze-quiz', {
@@ -215,11 +209,9 @@ document.addEventListener('DOMContentLoaded', () => {
       body: JSON.stringify({ quizType: type, score, qaPairs: qaPairs.join('\n') })
     })
         .then(res => {
-          console.log(`[DEBUG] Received response status: ${res.status}`);
           return res.json();
         })
         .then(data => {
-          console.log('[DEBUG] Response data:', data);
           summaries[type] = { summary: data.summary, severity: data.severity, score };
           displaySummary();
           updateButtonStates();
@@ -267,19 +259,15 @@ document.addEventListener('DOMContentLoaded', () => {
         .map(([type, data]) => `${type.toUpperCase()} (Score: ${data.score}, Severity: ${data.severity})\nSummary: ${data.summary}`)
         .join('\n\n');
 
-    console.log('[DEBUG] Sending overall summary request with:', { quizSummariesText, reflection });
-
     fetch('/quiz/overall-summary', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ quizSummaries: quizSummariesText, userReflection: reflection })
     })
         .then(res => {
-          console.log(`[DEBUG] Overall summary response status: ${res.status}`);
           return res.json();
         })
         .then(data => {
-          console.log('[DEBUG] Overall summary data:', data);
           const overallArea = document.getElementById('overall-summary-area');
           overallArea.classList.remove('hidden');
           overallArea.innerHTML = `
